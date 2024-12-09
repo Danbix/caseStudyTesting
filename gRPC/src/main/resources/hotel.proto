@@ -1,0 +1,141 @@
+syntax = "proto3";
+
+option java_package = "com.grpc.stubs";
+option java_multiple_files = true;
+
+service HotelService {
+  // Guest Services
+  rpc GetGuest(GetGuestRequest) returns (Guest);
+  rpc GetAllGuests(Empty) returns (GuestList);
+  rpc CreateGuest(CreateGuestRequest) returns (Guest);
+  rpc UpdateGuest(UpdateGuestRequest) returns (Guest);
+  rpc DeleteGuest(DeleteGuestRequest) returns (Guest);
+
+  // Reservation Services
+  rpc GetReservation(GetReservationRequest) returns (Reservation);
+  rpc GetAllReservations(Empty) returns (ReservationList);
+  rpc CreateReservation(CreateReservationRequest) returns (Reservation);
+  rpc UpdateReservation(UpdateReservationRequest) returns (Reservation);
+  rpc DeleteReservation(DeleteReservationRequest) returns (Reservation);
+
+  // Room Services
+  rpc GetRoom(GetRoomRequest) returns (Room);
+  rpc GetAllRooms(Empty) returns (RoomList);
+  rpc CreateRoom(CreateRoomRequest) returns (Room);
+  rpc UpdateRoom(UpdateRoomRequest) returns (Room);
+  rpc DeleteRoom(DeleteRoomRequest) returns (Room);
+}
+
+// Guest Messages
+message Guest {
+  int32 id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string email = 4;
+  string phone_number = 5;
+}
+
+message GetGuestRequest {
+  int32 id = 1;
+}
+
+message CreateGuestRequest {
+  string first_name = 1;
+  string last_name = 2;
+  string email = 3;
+  string phone_number = 4;
+}
+
+message UpdateGuestRequest {
+  int32 id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string email = 4;
+  string phone_number = 5;
+}
+
+message DeleteGuestRequest {
+  int32 id = 1;
+}
+
+message GuestList {
+  repeated Guest guests = 1;
+}
+
+// Reservation Messages
+message Reservation {
+  int32 id = 1;
+  string check_in_date = 2;
+  string check_out_date = 3;
+  float total_cost = 4;
+  int32 guest_id = 5;
+  int32 room_id = 6;
+}
+
+message GetReservationRequest {
+  int32 id = 1;
+}
+
+message CreateReservationRequest {
+  string check_in_date = 1;
+  string check_out_date = 2;
+  float total_cost = 3;
+  int32 guest_id = 4;
+  int32 room_id = 5;
+}
+
+message UpdateReservationRequest {
+  int32 id = 1;
+  string check_in_date = 2;
+  string check_out_date = 3;
+  float total_cost = 4;
+  int32 guest_id = 5;
+  int32 room_id = 6;
+}
+
+message DeleteReservationRequest {
+  int32 id = 1;
+}
+
+message ReservationList {
+  repeated Reservation reservations = 1;
+}
+
+// Room Messages
+message Room {
+  int32 id = 1;
+  string room_number = 2;
+  string type = 3;
+  float price_per_night = 4;
+  bool available = 5;
+}
+
+message GetRoomRequest {
+  int32 id = 1;
+}
+
+message CreateRoomRequest {
+  string room_number = 1;
+  string type = 2;
+  float price_per_night = 3;
+  bool available = 4;
+}
+
+message UpdateRoomRequest {
+  int32 id = 1;
+  string room_number = 2;
+  string type = 3;
+  float price_per_night = 4;
+  bool available = 5;
+}
+
+message DeleteRoomRequest {
+  int32 id = 1;
+}
+
+message RoomList {
+  repeated Room rooms = 1;
+}
+
+// Common Messages
+message Empty {}

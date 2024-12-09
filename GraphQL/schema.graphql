@@ -1,0 +1,52 @@
+
+type Guest {
+  id: ID!
+  first_name: String!
+  last_name: String!
+  email: String!
+  phone_number: String!
+}
+
+type Reservation {
+  id: ID!
+  check_in_date: String!
+  check_out_date: String!
+  total_cost: Float!
+  guest_id: Guest!
+  room_id: Room!
+}
+
+type Room {
+  id: ID!
+  room_number: String!
+  type: String!
+  price_per_night: Float!
+  available: Boolean!
+  reservations: [Reservation!]!
+}
+
+
+type Query {
+  getGuest(id: ID!): Guest
+  getAllGuests: [Guest!]!
+  
+  getReservation(id: ID!): Reservation
+  getAllReservations: [Reservation!]!
+  
+  getRoom(id: ID!): Room
+  getAllRooms: [Room!]!
+}
+
+type Mutation {
+  createGuest(first_name: String!, last_name: String!, email: String!, phone_number: String!): Guest!
+  updateGuest(id: ID!, first_name: String, last_name: String, email: String, phone_number: String): Guest!
+  deleteGuest(id: ID!): Guest!
+  
+  createReservation(check_in_date: String!, check_out_date: String!, total_cost: Float!, guest_id: ID!, room_id: ID!): Reservation!
+  updateReservation(id: ID!, check_in_date: String, check_out_date: String, total_cost: Float, guest_id: ID, room_id: ID): Reservation!
+  deleteReservation(id: ID!): Reservation!
+  
+  createRoom(room_number: String!, type: String!, price_per_night: Float!, available: Boolean!): Room!
+  updateRoom(id: ID!, room_number: String, type: String, price_per_night: Float, available: Boolean): Room!
+  deleteRoom(id: ID!): Room!
+}
