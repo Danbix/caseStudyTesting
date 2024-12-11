@@ -1,0 +1,31 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'spring-rest'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['localhost:8080']
+        labels:
+          application: 'rest'
+
+  - job_name: 'spring-soap'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['localhost:8081']
+        labels:
+          application: 'soap'
+
+  - job_name: 'spring-grpc'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['localhost:8083']
+        labels:
+          application: 'grpc'
+
+  - job_name: 'graphql'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['localhost:4000']
+        labels:
+          application: 'graphql'

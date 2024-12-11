@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="gRPC Performance Test">
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="host" elementType="Argument">
+            <stringProp name="Argument.name">host</stringProp>
+            <stringProp name="Argument.value">localhost</stringProp>
+          </elementProp>
+          <elementProp name="port" elementType="Argument">
+            <stringProp name="Argument.name">port</stringProp>
+            <stringProp name="Argument.value">9090</stringProp>
+          </elementProp>
+        </collectionProp>
+      </elementProp>
+    </TestPlan>
+    <hashTree>
+      <!-- Thread Group -->
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="gRPC Thread Group">
+        <stringProp name="ThreadGroup.num_threads">10</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController">
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <!-- gRPC Request: Create Reservation -->
+        <GrpcSampler guiclass="GrpcSamplerGui" testclass="GrpcSampler" testname="Create Reservation (gRPC)">
+          <stringProp name="GrpcSampler.host">${host}</stringProp>
+          <stringProp name="GrpcSampler.port">${port}</stringProp>
+          <stringProp name="GrpcSampler.service">ReservationService</stringProp>
+          <stringProp name="GrpcSampler.method">CreateReservation</stringProp>
+          <stringProp name="GrpcSampler.deadlineMs">10000</stringProp>
+          <stringProp name="GrpcSampler.metadata"></stringProp>
+          <stringProp name="GrpcSampler.message">
+            {
+              "checkInDate": "2024-12-20",
+              "checkOutDate": "2024-12-25",
+              "totalCost": 500,
+              "guestId": 1,
+              "roomId": 1
+            }
+          </stringProp>
+        </GrpcSampler>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

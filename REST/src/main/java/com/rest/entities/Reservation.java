@@ -23,6 +23,8 @@ public class Reservation {
 
     private double totalCost;
 
+    private String extraDetails;
+
     @ManyToOne
     @JoinColumn(name = "guest_id")
     private Guest guest;

@@ -1,7 +1,7 @@
 import { Sequelize, DataTypes, Model, Optional } from 'sequelize';
 
 
-const sequelize = new Sequelize('hotel2', 'root', '1234', {
+const sequelize = new Sequelize('hotel', 'root', '', {
     host: 'localhost',
     dialect: 'mysql',
     port: 3306
@@ -90,7 +90,8 @@ Guest.init(
   {
     sequelize,
     modelName: 'Guest',
-    tableName: 'Guests'
+    tableName: 'Guests',
+    timestamps: false
   }
 );
 
